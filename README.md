@@ -10,6 +10,12 @@ python main.py
 
 Navigate to `http://localhost:8000`
 
+## Voucher Adventure sessions
+
+The stateful Voucher Adventure API, local/PostgreSQL storage behavior, and
+frontend contract are documented in
+[`backend/VOUCHER_ADVENTURE_API.md`](backend/VOUCHER_ADVENTURE_API.md).
+
 ## Project Structure
 
 ```

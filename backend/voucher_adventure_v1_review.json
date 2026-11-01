@@ -1,0 +1,1280 @@
+[
+  {
+    "content_version": "v1",
+    "offer_id": "pepper_bun",
+    "variant": "A",
+    "base_price_cents": 800,
+    "bundle_price_cents": 1200,
+    "effective_unit_price_cents": 600,
+    "parameters": {
+      "second_item_rate": 0.5
+    },
+    "bundle_size": 2,
+    "dialogue": {
+      "greet": {
+        "english": "Fresh pepper buns are $8 each.",
+        "han": "新鮮的胡椒餅，一個八箍。",
+        "poj": "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê peh kho͘.",
+        "audio": "/audio-clips/n_va_v1_greet.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê peh kho͘."
+      },
+      "offer": {
+        "english": "Yeah—the second one is half price.",
+        "han": "有，第二個半價。",
+        "poj": "Ū, tē-jī ê pòaⁿ-kè.",
+        "audio": "/audio-clips/n_va_v1_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ū, tē-jī ê pòaⁿ-kè."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much does the second bun cost?",
+        "correct_answer": 400,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Only the second bun is discounted; it costs 50% of the original price.",
+        "formula_hint": "$8.00 × 50% = ?",
+        "correct_feedback": "Correct. The second bun costs $4.00.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What is the total price for both pepper buns?",
+        "correct_answer": 1200,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Add the full-price first bun and the half-price second bun.",
+        "formula_hint": "$8.00 + $4.00 = ?",
+        "correct_feedback": "Correct. Both pepper buns cost $12.00 in total.",
+        "misconceptions": {
+          "400": [
+            "SECOND_ITEM_ONLY",
+            "That is only the discounted second bun's price, not the total. Add the full-price first bun as well."
+          ],
+          "800": [
+            "BOTH_ITEMS_TREATED_AS_ONE_FULL_PRICE",
+            "That total accounts for only one full-price bun or discounts both buns. The first bun is full price and the second is half price; add both prices."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: If each bun cost $10.00 with the same offer, what would two buns cost?",
+        "correct_answer": 1500,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $15.00.",
+        "misconceptions": {},
+        "source_variant": "B"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "pepper_bun",
+    "variant": "B",
+    "base_price_cents": 1000,
+    "bundle_price_cents": 1500,
+    "effective_unit_price_cents": 750,
+    "parameters": {
+      "second_item_rate": 0.5
+    },
+    "bundle_size": 2,
+    "dialogue": {
+      "greet": {
+        "english": "Fresh pepper buns are $10 each.",
+        "han": "新鮮的胡椒餅，一個十箍。",
+        "poj": "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v1_greet_B.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê cha̍p kho͘."
+      },
+      "offer": {
+        "english": "Yeah—the second one is half price.",
+        "han": "有，第二個半價。",
+        "poj": "Ū, tē-jī ê pòaⁿ-kè.",
+        "audio": "/audio-clips/n_va_v1_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ū, tē-jī ê pòaⁿ-kè."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much does the second bun cost?",
+        "correct_answer": 500,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Only the second bun is discounted; it costs 50% of the original price.",
+        "formula_hint": "$10.00 × 50% = ?",
+        "correct_feedback": "Correct. The second bun costs $5.00.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What is the total price for both pepper buns?",
+        "correct_answer": 1500,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Add the full-price first bun and the half-price second bun.",
+        "formula_hint": "$10.00 + $5.00 = ?",
+        "correct_feedback": "Correct. Both pepper buns cost $15.00 in total.",
+        "misconceptions": {
+          "500": [
+            "SECOND_ITEM_ONLY",
+            "That is only the discounted second bun's price, not the total. Add the full-price first bun as well."
+          ],
+          "1000": [
+            "BOTH_ITEMS_TREATED_AS_ONE_FULL_PRICE",
+            "That total accounts for only one full-price bun or discounts both buns. The first bun is full price and the second is half price; add both prices."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: If each bun cost $12.00 with the same offer, what would two buns cost?",
+        "correct_answer": 1800,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $18.00.",
+        "misconceptions": {},
+        "source_variant": "C"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "pepper_bun",
+    "variant": "C",
+    "base_price_cents": 1200,
+    "bundle_price_cents": 1800,
+    "effective_unit_price_cents": 900,
+    "parameters": {
+      "second_item_rate": 0.5
+    },
+    "bundle_size": 2,
+    "dialogue": {
+      "greet": {
+        "english": "Fresh pepper buns are $12 each.",
+        "han": "新鮮的胡椒餅，一個十二箍。",
+        "poj": "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê cha̍p-jī kho͘.",
+        "audio": "/audio-clips/n_va_v1_greet_C.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê cha̍p-jī kho͘."
+      },
+      "offer": {
+        "english": "Yeah—the second one is half price.",
+        "han": "有，第二個半價。",
+        "poj": "Ū, tē-jī ê pòaⁿ-kè.",
+        "audio": "/audio-clips/n_va_v1_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ū, tē-jī ê pòaⁿ-kè."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much does the second bun cost?",
+        "correct_answer": 600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Only the second bun is discounted; it costs 50% of the original price.",
+        "formula_hint": "$12.00 × 50% = ?",
+        "correct_feedback": "Correct. The second bun costs $6.00.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What is the total price for both pepper buns?",
+        "correct_answer": 1800,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Add the full-price first bun and the half-price second bun.",
+        "formula_hint": "$12.00 + $6.00 = ?",
+        "correct_feedback": "Correct. Both pepper buns cost $18.00 in total.",
+        "misconceptions": {
+          "600": [
+            "SECOND_ITEM_ONLY",
+            "That is only the discounted second bun's price, not the total. Add the full-price first bun as well."
+          ],
+          "1200": [
+            "BOTH_ITEMS_TREATED_AS_ONE_FULL_PRICE",
+            "That total accounts for only one full-price bun or discounts both buns. The first bun is full price and the second is half price; add both prices."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: If each bun cost $8.00 with the same offer, what would two buns cost?",
+        "correct_answer": 1200,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $12.00.",
+        "misconceptions": {},
+        "source_variant": "A"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "chicken_wing_rice_roll",
+    "variant": "A",
+    "base_price_cents": 1000,
+    "bundle_price_cents": 800,
+    "effective_unit_price_cents": 800,
+    "parameters": {
+      "discount_rate": 0.2
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Chicken wing rice rolls are normally $10 each.",
+        "han": "雞翅包飯原價一個十箍。",
+        "poj": "Ke-si̍t pau-pn̄g goân-kè chi̍t ê cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v2_greet.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ke-si̍t pau-pn̄g goân-kè chi̍t ê cha̍p kho͘."
+      },
+      "offer": {
+        "english": "They're 20% off today.",
+        "han": "今仔日減兩成。",
+        "poj": "Kin-á-ji̍t kiám nn̄g-siâⁿ.",
+        "audio": "/audio-clips/n_va_v2_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t kiám nn̄g-siâⁿ."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $10.00 original price?",
+        "correct_answer": 200,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Find 20% of the original price.",
+        "formula_hint": "$10.00 × 20% = ?",
+        "correct_feedback": "Correct. The discount amount is $2.00.",
+        "misconceptions": {
+          "800": [
+            "FINAL_PRICE_AS_DISCOUNT_AMOUNT",
+            "That is the price after the discount. The question asks how much is taken off."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 800,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the discount amount from the original price.",
+        "formula_hint": "$10.00 − $2.00 = ?",
+        "correct_feedback": "Correct. You pay $8.00.",
+        "misconceptions": {
+          "200": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the amount taken off, not the final price. Subtract it from the original price."
+          ],
+          "1000": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Apply the discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $20.00 with the same offer. What price would you pay?",
+        "correct_answer": 1600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $16.00.",
+        "misconceptions": {},
+        "source_variant": "B"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "chicken_wing_rice_roll",
+    "variant": "B",
+    "base_price_cents": 2000,
+    "bundle_price_cents": 1600,
+    "effective_unit_price_cents": 1600,
+    "parameters": {
+      "discount_rate": 0.2
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Chicken wing rice rolls are normally $20 each.",
+        "han": "雞翅包飯原價一個二十箍。",
+        "poj": "Ke-si̍t pau-pn̄g goân-kè chi̍t ê jī-cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v2_greet_B.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ke-si̍t pau-pn̄g goân-kè chi̍t ê jī-cha̍p kho͘."
+      },
+      "offer": {
+        "english": "They're 20% off today.",
+        "han": "今仔日減兩成。",
+        "poj": "Kin-á-ji̍t kiám nn̄g-siâⁿ.",
+        "audio": "/audio-clips/n_va_v2_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t kiám nn̄g-siâⁿ."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $20.00 original price?",
+        "correct_answer": 400,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Find 20% of the original price.",
+        "formula_hint": "$20.00 × 20% = ?",
+        "correct_feedback": "Correct. The discount amount is $4.00.",
+        "misconceptions": {
+          "1600": [
+            "FINAL_PRICE_AS_DISCOUNT_AMOUNT",
+            "That is the price after the discount. The question asks how much is taken off."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 1600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the discount amount from the original price.",
+        "formula_hint": "$20.00 − $4.00 = ?",
+        "correct_feedback": "Correct. You pay $16.00.",
+        "misconceptions": {
+          "400": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the amount taken off, not the final price. Subtract it from the original price."
+          ],
+          "2000": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Apply the discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $30.00 with the same offer. What price would you pay?",
+        "correct_answer": 2400,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $24.00.",
+        "misconceptions": {},
+        "source_variant": "C"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "chicken_wing_rice_roll",
+    "variant": "C",
+    "base_price_cents": 3000,
+    "bundle_price_cents": 2400,
+    "effective_unit_price_cents": 2400,
+    "parameters": {
+      "discount_rate": 0.2
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Chicken wing rice rolls are normally $30 each.",
+        "han": "雞翅包飯原價一個三十箍。",
+        "poj": "Ke-si̍t pau-pn̄g goân-kè chi̍t ê saⁿ-cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v2_greet_C.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ke-si̍t pau-pn̄g goân-kè chi̍t ê saⁿ-cha̍p kho͘."
+      },
+      "offer": {
+        "english": "They're 20% off today.",
+        "han": "今仔日減兩成。",
+        "poj": "Kin-á-ji̍t kiám nn̄g-siâⁿ.",
+        "audio": "/audio-clips/n_va_v2_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t kiám nn̄g-siâⁿ."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $30.00 original price?",
+        "correct_answer": 600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Find 20% of the original price.",
+        "formula_hint": "$30.00 × 20% = ?",
+        "correct_feedback": "Correct. The discount amount is $6.00.",
+        "misconceptions": {
+          "2400": [
+            "FINAL_PRICE_AS_DISCOUNT_AMOUNT",
+            "That is the price after the discount. The question asks how much is taken off."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 2400,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the discount amount from the original price.",
+        "formula_hint": "$30.00 − $6.00 = ?",
+        "correct_feedback": "Correct. You pay $24.00.",
+        "misconceptions": {
+          "600": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the amount taken off, not the final price. Subtract it from the original price."
+          ],
+          "3000": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Apply the discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $10.00 with the same offer. What price would you pay?",
+        "correct_answer": 800,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $8.00.",
+        "misconceptions": {},
+        "source_variant": "A"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "hsinchu_pork_ball",
+    "variant": "A",
+    "base_price_cents": 1000,
+    "bundle_price_cents": 700,
+    "effective_unit_price_cents": 700,
+    "parameters": {
+      "discount_rate": 0.3
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Hsinchu pork balls are normally $10 each.",
+        "han": "新竹貢丸原價一個十箍。",
+        "poj": "Sin-tek kòng-oân goân-kè chi̍t ê cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v3_greet.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Sin-tek kòng-oân goân-kè chi̍t ê cha̍p kho͘."
+      },
+      "offer": {
+        "english": "They're 30% off today.",
+        "han": "今仔日減三成。",
+        "poj": "Kin-á-ji̍t kiám saⁿ-siâⁿ.",
+        "audio": "/audio-clips/n_va_v3_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t kiám saⁿ-siâⁿ."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $10.00 original price?",
+        "correct_answer": 300,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Find 30% of the original price.",
+        "formula_hint": "$10.00 × 30% = ?",
+        "correct_feedback": "Correct. The discount amount is $3.00.",
+        "misconceptions": {
+          "700": [
+            "FINAL_PRICE_AS_DISCOUNT_AMOUNT",
+            "That is the price after the discount. The question asks how much is taken off."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 700,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the discount amount from the original price.",
+        "formula_hint": "$10.00 − $3.00 = ?",
+        "correct_feedback": "Correct. You pay $7.00.",
+        "misconceptions": {
+          "300": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the amount taken off, not the final price. Subtract it from the original price."
+          ],
+          "1000": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Apply the discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $20.00 with the same offer. What price would you pay?",
+        "correct_answer": 1400,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $14.00.",
+        "misconceptions": {},
+        "source_variant": "B"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "hsinchu_pork_ball",
+    "variant": "B",
+    "base_price_cents": 2000,
+    "bundle_price_cents": 1400,
+    "effective_unit_price_cents": 1400,
+    "parameters": {
+      "discount_rate": 0.3
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Hsinchu pork balls are normally $20 each.",
+        "han": "新竹貢丸原價一個二十箍。",
+        "poj": "Sin-tek kòng-oân goân-kè chi̍t ê jī-cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v3_greet_B.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Sin-tek kòng-oân goân-kè chi̍t ê jī-cha̍p kho͘."
+      },
+      "offer": {
+        "english": "They're 30% off today.",
+        "han": "今仔日減三成。",
+        "poj": "Kin-á-ji̍t kiám saⁿ-siâⁿ.",
+        "audio": "/audio-clips/n_va_v3_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t kiám saⁿ-siâⁿ."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $20.00 original price?",
+        "correct_answer": 600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Find 30% of the original price.",
+        "formula_hint": "$20.00 × 30% = ?",
+        "correct_feedback": "Correct. The discount amount is $6.00.",
+        "misconceptions": {
+          "1400": [
+            "FINAL_PRICE_AS_DISCOUNT_AMOUNT",
+            "That is the price after the discount. The question asks how much is taken off."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 1400,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the discount amount from the original price.",
+        "formula_hint": "$20.00 − $6.00 = ?",
+        "correct_feedback": "Correct. You pay $14.00.",
+        "misconceptions": {
+          "600": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the amount taken off, not the final price. Subtract it from the original price."
+          ],
+          "2000": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Apply the discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $30.00 with the same offer. What price would you pay?",
+        "correct_answer": 2100,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $21.00.",
+        "misconceptions": {},
+        "source_variant": "C"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "hsinchu_pork_ball",
+    "variant": "C",
+    "base_price_cents": 3000,
+    "bundle_price_cents": 2100,
+    "effective_unit_price_cents": 2100,
+    "parameters": {
+      "discount_rate": 0.3
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Hsinchu pork balls are normally $30 each.",
+        "han": "新竹貢丸原價一個三十箍。",
+        "poj": "Sin-tek kòng-oân goân-kè chi̍t ê saⁿ-cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v3_greet_C.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Sin-tek kòng-oân goân-kè chi̍t ê saⁿ-cha̍p kho͘."
+      },
+      "offer": {
+        "english": "They're 30% off today.",
+        "han": "今仔日減三成。",
+        "poj": "Kin-á-ji̍t kiám saⁿ-siâⁿ.",
+        "audio": "/audio-clips/n_va_v3_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t kiám saⁿ-siâⁿ."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $30.00 original price?",
+        "correct_answer": 900,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Find 30% of the original price.",
+        "formula_hint": "$30.00 × 30% = ?",
+        "correct_feedback": "Correct. The discount amount is $9.00.",
+        "misconceptions": {
+          "2100": [
+            "FINAL_PRICE_AS_DISCOUNT_AMOUNT",
+            "That is the price after the discount. The question asks how much is taken off."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 2100,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the discount amount from the original price.",
+        "formula_hint": "$30.00 − $9.00 = ?",
+        "correct_feedback": "Correct. You pay $21.00.",
+        "misconceptions": {
+          "900": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the amount taken off, not the final price. Subtract it from the original price."
+          ],
+          "3000": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Apply the discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $10.00 with the same offer. What price would you pay?",
+        "correct_answer": 700,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $7.00.",
+        "misconceptions": {},
+        "source_variant": "A"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "tube_rice_pudding",
+    "variant": "A",
+    "base_price_cents": 600,
+    "bundle_price_cents": 600,
+    "effective_unit_price_cents": 300,
+    "parameters": {
+      "buy_quantity": 1,
+      "free_quantity": 1
+    },
+    "bundle_size": 2,
+    "dialogue": {
+      "greet": {
+        "english": "Tube rice puddings are $6 each.",
+        "han": "筒仔米糕一個六箍。",
+        "poj": "Tâng-á-bí-ko chi̍t ê la̍k kho͘.",
+        "audio": "/audio-clips/n_va_v4_greet.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Tâng-á-bí-ko chi̍t ê la̍k kho͘."
+      },
+      "offer": {
+        "english": "Yeah—buy one, get one free.",
+        "han": "有，買一個送一個。",
+        "poj": "Ū, bé chi̍t ê sàng chi̍t ê.",
+        "audio": "/audio-clips/n_va_v4_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ū, bé chi̍t ê sàng chi̍t ê."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much does the second rice pudding cost?",
+        "correct_answer": 0,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "You pay full price for the first item; the second item is free.",
+        "formula_hint": "Second item price = $0.00",
+        "correct_feedback": "Correct. The second rice pudding is free.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What is the total price for both rice puddings?",
+        "correct_answer": 600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "The first item is full price and the second item is free.",
+        "formula_hint": "$6.00 + $0.00 = ?",
+        "correct_feedback": "Correct. Both rice puddings cost $6.00 in total.",
+        "misconceptions": {
+          "0": [
+            "FREE_ITEM_MEANS_TOTAL_IS_ZERO",
+            "Only the second item is free. The first item is still full price."
+          ],
+          "1200": [
+            "NO_FREE_ITEM_APPLIED",
+            "The second item is free, so do not charge both items at full price."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: If each pudding cost $8.00 with the same offer, what would two cost?",
+        "correct_answer": 800,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $8.00.",
+        "misconceptions": {},
+        "source_variant": "B"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "tube_rice_pudding",
+    "variant": "B",
+    "base_price_cents": 800,
+    "bundle_price_cents": 800,
+    "effective_unit_price_cents": 400,
+    "parameters": {
+      "buy_quantity": 1,
+      "free_quantity": 1
+    },
+    "bundle_size": 2,
+    "dialogue": {
+      "greet": {
+        "english": "Tube rice puddings are $8 each.",
+        "han": "筒仔米糕一個八箍。",
+        "poj": "Tâng-á-bí-ko chi̍t ê peh kho͘.",
+        "audio": "/audio-clips/n_va_v4_greet_B.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Tâng-á-bí-ko chi̍t ê peh kho͘."
+      },
+      "offer": {
+        "english": "Yeah—buy one, get one free.",
+        "han": "有，買一個送一個。",
+        "poj": "Ū, bé chi̍t ê sàng chi̍t ê.",
+        "audio": "/audio-clips/n_va_v4_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ū, bé chi̍t ê sàng chi̍t ê."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much does the second rice pudding cost?",
+        "correct_answer": 0,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "You pay full price for the first item; the second item is free.",
+        "formula_hint": "Second item price = $0.00",
+        "correct_feedback": "Correct. The second rice pudding is free.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What is the total price for both rice puddings?",
+        "correct_answer": 800,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "The first item is full price and the second item is free.",
+        "formula_hint": "$8.00 + $0.00 = ?",
+        "correct_feedback": "Correct. Both rice puddings cost $8.00 in total.",
+        "misconceptions": {
+          "0": [
+            "FREE_ITEM_MEANS_TOTAL_IS_ZERO",
+            "Only the second item is free. The first item is still full price."
+          ],
+          "1600": [
+            "NO_FREE_ITEM_APPLIED",
+            "The second item is free, so do not charge both items at full price."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: If each pudding cost $10.00 with the same offer, what would two cost?",
+        "correct_answer": 1000,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $10.00.",
+        "misconceptions": {},
+        "source_variant": "C"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "tube_rice_pudding",
+    "variant": "C",
+    "base_price_cents": 1000,
+    "bundle_price_cents": 1000,
+    "effective_unit_price_cents": 500,
+    "parameters": {
+      "buy_quantity": 1,
+      "free_quantity": 1
+    },
+    "bundle_size": 2,
+    "dialogue": {
+      "greet": {
+        "english": "Tube rice puddings are $10 each.",
+        "han": "筒仔米糕一個十箍。",
+        "poj": "Tâng-á-bí-ko chi̍t ê cha̍p kho͘.",
+        "audio": "/audio-clips/n_va_v4_greet_C.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Tâng-á-bí-ko chi̍t ê cha̍p kho͘."
+      },
+      "offer": {
+        "english": "Yeah—buy one, get one free.",
+        "han": "有，買一個送一個。",
+        "poj": "Ū, bé chi̍t ê sàng chi̍t ê.",
+        "audio": "/audio-clips/n_va_v4_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ū, bé chi̍t ê sàng chi̍t ê."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much does the second rice pudding cost?",
+        "correct_answer": 0,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "You pay full price for the first item; the second item is free.",
+        "formula_hint": "Second item price = $0.00",
+        "correct_feedback": "Correct. The second rice pudding is free.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What is the total price for both rice puddings?",
+        "correct_answer": 1000,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "The first item is full price and the second item is free.",
+        "formula_hint": "$10.00 + $0.00 = ?",
+        "correct_feedback": "Correct. Both rice puddings cost $10.00 in total.",
+        "misconceptions": {
+          "0": [
+            "FREE_ITEM_MEANS_TOTAL_IS_ZERO",
+            "Only the second item is free. The first item is still full price."
+          ],
+          "2000": [
+            "NO_FREE_ITEM_APPLIED",
+            "The second item is free, so do not charge both items at full price."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: If each pudding cost $6.00 with the same offer, what would two cost?",
+        "correct_answer": 600,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $6.00.",
+        "misconceptions": {},
+        "source_variant": "A"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "steamed_taro_cake",
+    "variant": "A",
+    "base_price_cents": 500,
+    "bundle_price_cents": 300,
+    "effective_unit_price_cents": 300,
+    "parameters": {
+      "amount_off_cents": 200
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Steamed taro cakes are $5 each.",
+        "han": "芋粿巧一個五箍。",
+        "poj": "Ō͘-kóe-khiáu chi̍t ê gō͘ kho͘.",
+        "audio": "/audio-clips/n_va_v5_greet.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ō͘-kóe-khiáu chi̍t ê gō͘ kho͘."
+      },
+      "offer": {
+        "english": "Today they're $2 off each.",
+        "han": "今仔日一個減兩箍。",
+        "poj": "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘.",
+        "audio": "/audio-clips/n_va_v5_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $5.00 original price?",
+        "correct_answer": 200,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Use the fixed amount stated by the offer.",
+        "formula_hint": "Discount amount = $2.00",
+        "correct_feedback": "Correct. The discount amount is $2.00.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 300,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the fixed discount from the original price.",
+        "formula_hint": "$5.00 − $2.00 = ?",
+        "correct_feedback": "Correct. You pay $3.00.",
+        "misconceptions": {
+          "200": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the discount amount, not the final price. Subtract it from the original price."
+          ],
+          "500": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Subtract the fixed discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $9.00 with the same offer. What price would you pay?",
+        "correct_answer": 700,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $7.00.",
+        "misconceptions": {},
+        "source_variant": "C"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "steamed_taro_cake",
+    "variant": "B",
+    "base_price_cents": 700,
+    "bundle_price_cents": 500,
+    "effective_unit_price_cents": 500,
+    "parameters": {
+      "amount_off_cents": 200
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Steamed taro cakes are $7 each.",
+        "han": "芋粿巧一個七箍。",
+        "poj": "Ō͘-kóe-khiáu chi̍t ê chhit kho͘.",
+        "audio": "/audio-clips/n_va_v5_greet_B.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ō͘-kóe-khiáu chi̍t ê chhit kho͘."
+      },
+      "offer": {
+        "english": "Today they're $2 off each.",
+        "han": "今仔日一個減兩箍。",
+        "poj": "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘.",
+        "audio": "/audio-clips/n_va_v5_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $7.00 original price?",
+        "correct_answer": 200,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Use the fixed amount stated by the offer.",
+        "formula_hint": "Discount amount = $2.00",
+        "correct_feedback": "Correct. The discount amount is $2.00.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 500,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the fixed discount from the original price.",
+        "formula_hint": "$7.00 − $2.00 = ?",
+        "correct_feedback": "Correct. You pay $5.00.",
+        "misconceptions": {
+          "200": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the discount amount, not the final price. Subtract it from the original price."
+          ],
+          "700": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Subtract the fixed discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $9.00 with the same offer. What price would you pay?",
+        "correct_answer": 700,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $7.00.",
+        "misconceptions": {},
+        "source_variant": "C"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  },
+  {
+    "content_version": "v1",
+    "offer_id": "steamed_taro_cake",
+    "variant": "C",
+    "base_price_cents": 900,
+    "bundle_price_cents": 700,
+    "effective_unit_price_cents": 700,
+    "parameters": {
+      "amount_off_cents": 200
+    },
+    "bundle_size": 1,
+    "dialogue": {
+      "greet": {
+        "english": "Steamed taro cakes are $9 each.",
+        "han": "芋粿巧一個九箍。",
+        "poj": "Ō͘-kóe-khiáu chi̍t ê káu kho͘.",
+        "audio": "/audio-clips/n_va_v5_greet_C.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Ō͘-kóe-khiáu chi̍t ê káu kho͘."
+      },
+      "offer": {
+        "english": "Today they're $2 off each.",
+        "han": "今仔日一個減兩箍。",
+        "poj": "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘.",
+        "audio": "/audio-clips/n_va_v5_offer.wav",
+        "audio_exists": true,
+        "language_review": "APPROVED",
+        "audio_review": "APPROVED",
+        "tts_model": "facebook/mms-tts-nan",
+        "tts_input": "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘."
+      }
+    },
+    "questions": [
+      {
+        "skill": "RULE_MEANING",
+        "prompt_en": "How much is taken off the $9.00 original price?",
+        "correct_answer": 200,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Use the fixed amount stated by the offer.",
+        "formula_hint": "Discount amount = $2.00",
+        "correct_feedback": "Correct. The discount amount is $2.00.",
+        "misconceptions": {},
+        "source_variant": null
+      },
+      {
+        "skill": "PRICE_CALCULATION",
+        "prompt_en": "What price do you pay after the discount?",
+        "correct_answer": 700,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Subtract the fixed discount from the original price.",
+        "formula_hint": "$9.00 − $2.00 = ?",
+        "correct_feedback": "Correct. You pay $7.00.",
+        "misconceptions": {
+          "200": [
+            "DISCOUNT_AMOUNT_AS_FINAL_PRICE",
+            "That is the discount amount, not the final price. Subtract it from the original price."
+          ],
+          "900": [
+            "NO_DISCOUNT_APPLIED",
+            "That is the original price. Subtract the fixed discount before paying."
+          ]
+        },
+        "source_variant": null
+      },
+      {
+        "skill": "TRANSFER",
+        "prompt_en": "Challenge: A different item costs $5.00 with the same offer. What price would you pay?",
+        "correct_answer": 300,
+        "answer_unit": "MONEY_CENTS",
+        "rule_hint": "Apply the same offer rule to the new original price.",
+        "formula_hint": "Apply the previously learned rule to the new price.",
+        "correct_feedback": "Correct. The new price is $3.00.",
+        "misconceptions": {},
+        "source_variant": "A"
+      }
+    ],
+    "status": "APPROVED",
+    "approved": true,
+    "selectable_for_production": true
+  }
+]

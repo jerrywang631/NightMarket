@@ -1,6 +1,11 @@
+import base64
+import json
+import os
+import re
+
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from database.hok_db import Hok_DB
+
 from managers.dialogue_manager import (
     AUDIO_DIR,
     Dialogue_Manager,
@@ -9,10 +14,9 @@ from managers.dialogue_manager import (
 )
 from managers.vendor_manager import Vendor_Manager
 from managers.challenge_manager import Challenge_Manager
-import base64
-import json
-import os
-import re
+from voucher_adventure import VoucherAdventureService, create_voucher_repository
+from voucher_adventure.errors import VoucherAPIError
+from voucher_adventure.routes import register_voucher_routes
 
 try:
     from models.hok_translation import HokTranslation
@@ -30,6 +34,7 @@ class App:
         self.dialogue_manager = None
         self.vendor_manager = None
         self.challenge_manager = None
+        self.voucher_service = None
         self.app = None
 
     def run(self):
@@ -40,6 +45,9 @@ class App:
         self.dialogue_manager = Dialogue_Manager(self.mode)
         self.vendor_manager = Vendor_Manager(self.mode)
         self.challenge_manager = Challenge_Manager(self.mode)
+        self.voucher_service = VoucherAdventureService(
+            create_voucher_repository(), dialogue_manager=self.dialogue_manager
+        )
 
         if self.skip_models:
             print("[INFO] Skipping ML models (translation/TTS)")
@@ -205,6 +213,15 @@ class App:
                 }
             """
             node_data = self.dialogue_manager.get_dialogue_node(node_id)
+
+            session_id = request.args.get("session_id")
+            if session_id:
+                try:
+                    node_data = self.voucher_service.render_dialogue(
+                        session_id, node_id, node_data
+                    )
+                except VoucherAPIError as error:
+                    return jsonify(error.response()), error.status
 
             return jsonify(
                 {"status": "success", "data": node_data, "meta": {"processTimeMS": 123}}
@@ -1076,16 +1093,16 @@ class App:
         def health():
             return "OK", 200
 
+        register_voucher_routes(self.app, self.voucher_service)
+
     def run_local(self):
         self.app.run(host="0.0.0.0", port=8000, debug=False)
 
 
 def create_deploy_app():
-    """Create app for production deployment (Gunicorn)"""
-    import os
-
-    DATABASE_URL = os.environ.get("DATABASE_URL")
-    mode = "production" if DATABASE_URL else 2
+    """Create the Gunicorn application."""
+    database_url = os.environ.get("DATABASE_URL")
+    mode = "production" if database_url else 2
     deploy_app = App(mode=mode, skip_models=True)
     deploy_app.create_app()
     deploy_app.create_endpoints()
@@ -1101,8 +1118,6 @@ else:
 
 
 if __name__ == "__main__":
-    import os
-
     # 1. Database Selector
     print("\n=== NightMarket Local Development ===")
     print("  1 - Test DB       (hok_test_data.db)")
