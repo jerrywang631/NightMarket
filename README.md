@@ -94,11 +94,13 @@ API is served at `http://localhost:8000` when started with above instructions
 | POST | `/api/admin/options/<node_id>` | Create option |
 | PUT | `/api/admin/options/<option_id>` | Update option |
 | DELETE | `/api/admin/options/<option_id>` | Delete option |
+| GET | `/api/admin/option/<option_id>` | Get one option with `translation_HAN`, `translation_POJ`, `audio` |
 
 ### Admin - Translation
 | Method | Endpoint | Description |
 |--------|----------|--------------|
 | POST | `/api/admin/model/translate/<node_id>` | Translate to HAN/POJ |
+| POST | `/api/admin/model/translate-option/<option_id>` | Translate option to HAN/POJ (`output_lang` defaults to POJ) |
 
 Request:
 ```json
@@ -109,6 +111,7 @@ Request:
 | Method | Endpoint | Description |
 |--------|----------|--------------|
 | POST | `/api/admin/model/tts/<node_id>` | Generate audio |
+| POST | `/api/admin/model/tts-option/<option_id>` | Generate option audio (uses saved POJ if `translation_text` is omitted) |
 
 Request:
 ```json
