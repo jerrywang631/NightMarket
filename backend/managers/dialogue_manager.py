@@ -1,11 +1,27 @@
-from database.hok_db import Hok_DB
+from database.hok_db import Hok_DB, OPTION_TRANSLATIONS_COLUMNS
 import os
+import re
+
+AUDIO_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "audio-clips"
+)
+
+
+def audio_filename(path):
+    """Stored audio paths come from whichever machine ran TTS (Linux, Windows or
+    relative), but the file always lives in audio-clips/, so only the name matters."""
+    return re.split(r"[\\/]", path)[-1] if path else ""
+
+
+def audio_url(path):
+    return "/audio-clips/" + audio_filename(path) if path else ""
 
 
 class Dialogue_Manager(Hok_DB):
     def __init__(self, mode):
         super().__init__(mode)
         self.db = self.connect()
+        self.db.create_table("option_translations", OPTION_TRANSLATIONS_COLUMNS)
 
     def get_dialogue_node(self, node_id):
         dialogue = self.get_dialogue(node_id)[0]
@@ -44,10 +60,6 @@ class Dialogue_Manager(Hok_DB):
                 }
             )
 
-        audio_path = dialogue[5]
-        if audio_path and os.path.isabs(audio_path):
-            audio_path = "/audio-clips/" + os.path.basename(audio_path)
-
         return {
             "dialogue_node": node_id,
             "dialogue": {
@@ -55,7 +67,7 @@ class Dialogue_Manager(Hok_DB):
                 "text": dialogue[2],
                 "translation_HAN": dialogue[3],
                 "translation_POJ": dialogue[4],
-                "audio": audio_path,
+                "audio": audio_url(dialogue[5]),
                 "npc_id": dialogue[6],
                 "key_words": key_words_data,
             },
@@ -234,4 +246,48 @@ class Dialogue_Manager(Hok_DB):
     def delete_option(self, option_id):
         self.db.delete("options", "option_id = ?", (option_id,))
         self.db.delete("events", "option_id = ?", (option_id,))
+        self.db.delete("option_translations", "option_id = ?", (option_id,))
         return {"message": "Option deleted"}, True
+
+    def node_exists(self, node_id):
+        rows = self.db.get_data(
+            "SELECT 1 FROM dialogue_nodes WHERE node_id = ? "
+            "UNION SELECT 1 FROM dialogues WHERE node_id = ? LIMIT 1",
+            (node_id, node_id),
+        )
+        return bool(rows)
+
+    def get_option(self, option_id):
+        rows = self.db.get_data(
+            "SELECT o.node_id, o.option_id, o.option_TEXT, o.next_node_id, o.feedback_type, "
+            "t.translation_HAN, t.translation_POJ, t.audio_clip "
+            "FROM options o LEFT JOIN option_translations t ON o.option_id = t.option_id "
+            "WHERE o.option_id = ? ORDER BY o.rowid LIMIT 1",
+            (option_id,),
+        )
+        if not rows:
+            return None
+        row = rows[0]
+        return {
+            "node_id": row[0],
+            "option_id": row[1],
+            "option_text": row[2],
+            "next_node_id": row[3],
+            "feedback_type": row[4],
+            "translation_HAN": row[5] or "",
+            "translation_POJ": row[6] or "",
+            "audio": audio_url(row[7]),
+        }
+
+    def save_option_translation(self, option_id, fields):
+        """Upsert translation_HAN / translation_POJ / audio_clip for an option."""
+        existing = self.db.get_data(
+            "SELECT 1 FROM option_translations WHERE option_id = ?", (option_id,)
+        )
+        if existing:
+            self.db.update(
+                "option_translations", fields, "option_id = ?", (option_id,)
+            )
+        else:
+            self.db.insert("option_translations", [{"option_id": option_id, **fields}])
+        return self.get_option(option_id)

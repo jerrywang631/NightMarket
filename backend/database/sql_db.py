@@ -78,10 +78,10 @@ class SQL_DB:
         conn.close()
         return table_list
 
-    def get_data(self, command):
+    def get_data(self, command, params=None):
         conn = self.get_connection()
         cursor = conn.cursor()
-        res = cursor.execute(command)
+        res = cursor.execute(command, params or ())
         data = res.fetchall()
         conn.close()
         return data

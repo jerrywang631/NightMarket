@@ -1,6 +1,12 @@
 from .sql_db import SQL_DB
 import os
 
+# Kept separate from `options` so the positional
+# "INSERT INTO options VALUES (?,?,?,?,?)" in populate_lesson_*.py keeps working.
+OPTION_TRANSLATIONS_COLUMNS = (
+    "option_id TEXT PRIMARY KEY, translation_HAN TEXT, translation_POJ TEXT, audio_clip TEXT"
+)
+
 class Hok_DB:
     def __init__(self, mode=1):
         self.mode = mode
@@ -36,6 +42,7 @@ class Hok_DB:
         #self.db.create_table("words", "dialogue_id TEXT, word_id TEXT, word TEXT, translation TEXT, conTEXT TEXT, audio_clip TEXT")
 
         self.db.create_table("options", "node_id TEXT, option_id TEXT, option_TEXT TEXT, next_node_id TEXT, feedback_type TEXT")
+        self.db.create_table("option_translations", OPTION_TRANSLATIONS_COLUMNS)
         self.db.create_table("events", "option_id TEXT, event_id TEXT, event_type TEXT, metadata TEXT")
 
         self.db.create_table("vendors", "vendor_id TEXT, node_id TEXT, npc_id TEXT, vendor_name TEXT")

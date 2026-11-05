@@ -1,10 +1,16 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from database.hok_db import Hok_DB
-from managers.dialogue_manager import Dialogue_Manager
+from managers.dialogue_manager import (
+    AUDIO_DIR,
+    Dialogue_Manager,
+    audio_filename,
+    audio_url,
+)
 from managers.vendor_manager import Vendor_Manager
 from managers.challenge_manager import Challenge_Manager
 import base64
+import json
 import os
 import re
 
@@ -600,6 +606,23 @@ class App:
             )
             return send_from_directory(audio_dir, filename, mimetype="audio/wav")
 
+        @self.app.route("/api/v1/quizzes/<level_id>", methods=["GET"])
+        def get_quiz(level_id):
+            """Return versioned quiz content kept independently from dialogue DBs."""
+            safe_level_id = re.sub(r"[^a-zA-Z0-9_-]", "", level_id)
+            quiz_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                "quizzes",
+                f"{safe_level_id}.json",
+            )
+            if not safe_level_id or not os.path.isfile(quiz_path):
+                return jsonify({"status": "error", "message": "Quiz not found"}), 404
+
+            with open(quiz_path, "r", encoding="utf-8") as quiz_file:
+                quiz = json.load(quiz_file)
+
+            return jsonify({"status": "success", "data": quiz})
+
         @self.app.route("/api/admin/npcs", methods=["GET"])
         def admin_get_npcs():
             npcs = self.dialogue_manager.get_all_npcs()
@@ -649,14 +672,11 @@ class App:
                 d = self.dialogue_manager.get_dialogue(node[0])
                 if d:
                     audio_binary = ""
-                    audio_path = d[0][5] if d[0][5] else ""
-                    original_path = audio_path
-                    if audio_path and os.path.isabs(audio_path):
-                        audio_path = "/audio-clips/" + os.path.basename(audio_path)
-                    if original_path and os.path.exists(original_path):
-                        with open(original_path, "rb") as f:
+                    audio_file = os.path.join(AUDIO_DIR, audio_filename(d[0][5]))
+                    if d[0][5] and os.path.isfile(audio_file):
+                        with open(audio_file, "rb") as f:
                             audio_binary = base64.b64encode(f.read()).decode("utf-8")
-                    audio_src = {"audio_path": audio_path, "audio_binary": audio_binary}
+                    audio_src = {"audio_path": audio_url(d[0][5]), "audio_binary": audio_binary}
                     dialogues[node[0]] = {
                         "dialogue_id": d[0][1],
                         "dialogue": d[0][2],
@@ -742,14 +762,24 @@ class App:
         @self.app.route("/api/admin/dialogues/<node_id>", methods=["PUT"])
         def admin_update_dialogue(node_id):
             body = request.get_json()
-            dialogue_text = body.get("dialogue")
-            translation_HAN = body.get("translationHAN")
-            translation_POJ = body.get("translationPOJ")
+            dialogue_text, translation_HAN, translation_POJ = (
+                v.strip() if isinstance(v, str) else v
+                for v in (
+                    body.get("dialogue"),
+                    body.get("translationHAN"),
+                    body.get("translationPOJ"),
+                )
+            )
 
             if dialogue_text is None:
                 return jsonify({"status": "error", "message": "dialogue required"}), 400
+            # Audio is generated from the POJ, so only a POJ change invalidates it.
+            existing = self.dialogue_manager.get_dialogue(node_id)
+            audio_path = ""
+            if existing and (existing[0][4] or "").strip() == (translation_POJ or ""):
+                audio_path = existing[0][5] or ""
             result = self.dialogue_manager.update_dialogue(
-                node_id, dialogue_text, translation_HAN, translation_POJ, "" or ""
+                node_id, dialogue_text, translation_HAN, translation_POJ, audio_path
             )
             return jsonify({"status": "success", "data": result}), 200
 
@@ -782,6 +812,16 @@ class App:
                 return jsonify(
                     {"status": "error", "message": "option_id required"}
                 ), 400
+            # Unity's runtime quiz/option generation used to create rows under a
+            # made-up node ("quiz-generated") and re-insert existing option_ids.
+            if not self.dialogue_manager.node_exists(node_id):
+                return jsonify(
+                    {"status": "error", "message": f"Dialogue node '{node_id}' not found"}
+                ), 404
+            if self.dialogue_manager.get_option(option_id):
+                return jsonify(
+                    {"status": "error", "message": f"Option '{option_id}' already exists"}
+                ), 409
             result = self.dialogue_manager.create_option(
                 node_id, option_id, option_text, next_node_id, feedback_type
             )
@@ -809,6 +849,13 @@ class App:
         def admin_delete_option(option_id):
             result, success = self.dialogue_manager.delete_option(option_id)
             return jsonify({"status": "success", "data": result}), 200
+
+        @self.app.route("/api/admin/option/<option_id>", methods=["GET"])
+        def admin_get_option(option_id):
+            option = self.dialogue_manager.get_option(option_id)
+            if not option:
+                return jsonify({"status": "error", "message": "Option not found"}), 404
+            return jsonify({"status": "success", "data": option}), 200
 
         @self.app.route("/api/admin/vendors", methods=["GET"])
         def admin_get_vendors():
@@ -928,7 +975,12 @@ class App:
             body = request.get_json()
             output_lang = body.get("output_lang")
             dialogue_text = body.get("input_text")
-            translation = self.hokTranslation.translate(dialogue_text, output_lang)
+            try:
+                translation = self.hokTranslation.translate(dialogue_text, output_lang)
+            except Exception as e:
+                return jsonify(
+                    {"status": "error", "message": f"Translation failed: {e}"}
+                ), 500
             dialogue = self.dialogue_manager.get_dialogue(node_id)
             translation_HAN = dialogue[0][3]
             translation_POJ = dialogue[0][4]
@@ -957,7 +1009,66 @@ class App:
             audio_src = self.hokTTS.generate_tts(node_id, translation)
             dialogue = self.dialogue_manager.get_dialogue(node_id)
             result = self.dialogue_manager.update_dialogue(
-                node_id, dialogue[0][2], dialogue[0][3], dialogue[0][4], audio_src or ""
+                node_id,
+                dialogue[0][2],
+                dialogue[0][3],
+                dialogue[0][4],
+                "audio-clips/" + audio_filename(audio_src) if audio_src else "",
+            )
+            return jsonify({"status": "success", "data": result}), 200
+
+        @self.app.route(
+            "/api/admin/model/translate-option/<option_id>", methods=["POST"]
+        )
+        def admin_model_generate_option_translate(option_id):
+            if not self.hokTranslation:
+                return jsonify(
+                    {"status": "error", "message": "Translation model not available"}
+                ), 503
+            option = self.dialogue_manager.get_option(option_id)
+            if not option:
+                return jsonify({"status": "error", "message": "Option not found"}), 404
+            body = request.get_json(silent=True) or {}
+            output_lang = body.get("output_lang") or "POJ"
+            input_text = body.get("input_text") or option["option_text"]
+            try:
+                translation = self.hokTranslation.translate(input_text, output_lang)
+            except Exception as e:
+                return jsonify(
+                    {"status": "error", "message": f"Translation failed: {e}"}
+                ), 500
+            column = "translation_POJ" if output_lang == "POJ" else "translation_HAN"
+            result = self.dialogue_manager.save_option_translation(
+                option_id, {column: translation}
+            )
+            return jsonify({"status": "success", "data": result}), 200
+
+        @self.app.route("/api/admin/model/tts-option/<option_id>", methods=["POST"])
+        def admin_model_generate_option_tts(option_id):
+            if not self.hokTTS:
+                return jsonify(
+                    {"status": "error", "message": "TTS model not available"}
+                ), 503
+            option = self.dialogue_manager.get_option(option_id)
+            if not option:
+                return jsonify({"status": "error", "message": "Option not found"}), 404
+            body = request.get_json(silent=True) or {}
+            translation = body.get("translation_text") or option["translation_POJ"]
+            if not translation:
+                return jsonify(
+                    {
+                        "status": "error",
+                        "message": "translation_text required (option has no POJ translation)",
+                    }
+                ), 400
+            try:
+                audio_src = self.hokTTS.generate_tts(option_id, translation)
+            except Exception as e:
+                return jsonify(
+                    {"status": "error", "message": f"TTS failed: {e}"}
+                ), 500
+            result = self.dialogue_manager.save_option_translation(
+                option_id, {"audio_clip": "audio-clips/" + audio_filename(audio_src)}
             )
             return jsonify({"status": "success", "data": result}), 200
 
