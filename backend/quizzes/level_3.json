@@ -1,0 +1,97 @@
+{
+  "quiz_id": "level_3",
+  "version": 1,
+  "source": "Assets/Hokkien/LessonContent/Level 3 Questions.asset",
+  "questions": [
+    {
+      "question": "Why is 担仔面 also called 度小月担仔面？",
+      "choices": [
+        {
+          "text": "It was created by a person named Xiao Yue",
+          "poj": "",
+          "audio": "",
+          "explanation": "This is made up."
+        },
+        {
+          "text": "It was a celebration food that people ate during the small months",
+          "poj": "",
+          "audio": "",
+          "explanation": "This is made up."
+        },
+        {
+          "text": "It was a dish that fisherman carried on poles to sell during the small months",
+          "poj": "",
+          "audio": "",
+          "explanation": "度小月担仔面 is noodles in a pork and shrimp head broth, with shrimp, chicken, egg, and bean sprouts on top. Also known as 度小月担仔面, which directly translates to “get through the small month noodle on carrying pole”.  Months with frequent typhoons are called “小月”(small month). During these times, it is hard to go out to sea, so fishermen carried noodles on carrying poles and sold noodles for a living during these months. The noodles on a carrying pole helps them get through the small month, giving it the 度小月担仔面 its name."
+        },
+        {
+          "text": "It originated from a ferry crossing called Xiao Yue",
+          "poj": "",
+          "audio": "",
+          "explanation": "This is made up."
+        }
+      ],
+      "correct_answer_index": 2
+    },
+    {
+      "question": "Which of the following means allergy?",
+      "choices": [
+        {
+          "text": "过敏",
+          "poj": "Kòe-bín",
+          "audio": "/audio-clips/level3_allergy.wav",
+          "explanation": "This means allergy in Hokkien."
+        },
+        {
+          "text": "料理",
+          "poj": "Liāu-lí",
+          "audio": "/audio-clips/level3_cooking.wav",
+          "explanation": "This means \"cook\" in Hokkien."
+        },
+        {
+          "text": "牛肉",
+          "poj": "Gû-bah",
+          "audio": "/audio-clips/level3_beef.wav",
+          "explanation": "This means \"beef\" in Hokkien."
+        },
+        {
+          "text": "不要",
+          "poj": "M̄-ài",
+          "audio": "/audio-clips/level3_dont_want.wav",
+          "explanation": "This means \"I don't want...\" in Hokkien."
+        }
+      ],
+      "correct_answer_index": 0
+    },
+    {
+      "question": "What is 肉圆?",
+      "choices": [
+        {
+          "text": "A Taiwanese dumpling made of starch and rice flour, filled with meat and vegetables",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        },
+        {
+          "text": "A dish that fisherman carried on poles to sell during the small months",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        },
+        {
+          "text": "A Taiwanese meat ball that is served in a meat and vegetable broth",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        },
+        {
+          "text": "A Taiwanese dumpling made from wheat flour, filled with meat and vegetables",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        }
+      ],
+      "correct_answer_index": 0
+    }
+  ]
+}

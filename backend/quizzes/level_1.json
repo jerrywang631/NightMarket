@@ -1,0 +1,97 @@
+{
+  "quiz_id": "level_1",
+  "version": 2,
+  "source": "Assets/Hokkien/LessonContent/Level 1 Questions.asset",
+  "questions": [
+    {
+      "question": "Which of the following means \"How do you sell this?\"",
+      "choices": [
+        {
+          "text": "老板好",
+          "poj": "Lāu-pán hó",
+          "audio": "/audio-clips/level1_boss_hello.wav",
+          "explanation": "This means “Hello Boss”, which is a greeting to the stall owner."
+        },
+        {
+          "text": "怎么卖",
+          "poj": "Chóaⁿ bōe?",
+          "audio": "/audio-clips/level1_how_sell.wav",
+          "explanation": "This means “how do you sell this”, used to ask about the price of the dish"
+        },
+        {
+          "text": "你要多少",
+          "poj": "Lí beh gōa-chōe?",
+          "audio": "/audio-clips/level1_how_many.wav",
+          "explanation": "This means “how much do you want?”, used by the vendor to ask how much of something the buyer wants."
+        },
+        {
+          "text": "请问这是什么",
+          "poj": "Chhiáⁿ-mn̄g, che sī siánn-mih?",
+          "audio": "/audio-clips/level1_what_is_this.wav",
+          "explanation": "This means “What is this?”, you can use this to ask what others are eating or selling."
+        }
+      ],
+      "correct_answer_index": 1
+    },
+    {
+      "question": "If you want to ask about what a food is, what do you say?",
+      "choices": [
+        {
+          "text": "老板好",
+          "poj": "Lāu-pán hó",
+          "audio": "/audio-clips/level1_boss_hello.wav",
+          "explanation": "This means “Hello Boss”, which is a greeting to the stall owner."
+        },
+        {
+          "text": "怎么卖",
+          "poj": "Chóaⁿ bōe?",
+          "audio": "/audio-clips/level1_how_sell.wav",
+          "explanation": "This means “how do you sell this”, used to ask about the price of the dish"
+        },
+        {
+          "text": "你要多少",
+          "poj": "Lí beh gōa-chōe?",
+          "audio": "/audio-clips/level1_how_many.wav",
+          "explanation": "This means “how much do you want?”, used by the vendor to ask how much of something the buyer wants."
+        },
+        {
+          "text": "请问这是什么",
+          "poj": "Chhiáⁿ-mn̄g, che sī siánn-mih?",
+          "audio": "/audio-clips/level1_what_is_this.wav",
+          "explanation": "This means “What is this?”, you can use this to ask what others are eating or selling."
+        }
+      ],
+      "correct_answer_index": 3
+    },
+    {
+      "question": "Which of the following is traditionally used as a worship food for the Seven Sisters festival?",
+      "choices": [
+        {
+          "text": "凤梨酥 - pineapple cake",
+          "poj": "Ông-lâi-so͘",
+          "audio": "/audio-clips/level1_pineapple_cake.wav",
+          "explanation": "Pineapple cake is a popular Taiwanese snack, but not the expected worship food here."
+        },
+        {
+          "text": "筒仔米糕 - tube rice pudding",
+          "poj": "Tâng-á-bí-ko",
+          "audio": "/audio-clips/level1_tube_rice.wav",
+          "explanation": "Tube rice pudding is not the expected worship food here."
+        },
+        {
+          "text": "芋粿巧 - steamed taro cake",
+          "poj": "Ō͘-kué-khiau",
+          "audio": "/audio-clips/level1_taro_cake.wav",
+          "explanation": "Steamed taro cake is associated with other worship traditions."
+        },
+        {
+          "text": "白糖粿 - fried sweet rice cake",
+          "poj": "Pe̍h-thn̂g-kué",
+          "audio": "/audio-clips/level1_sweet_rice_cake.wav",
+          "explanation": "Fried Sweet Rice Cake(白糖粿) is a fried sticky rice dough served with grinded peanuts or sesame. It is a worship food for 七娘妈 (Seven Star), the goddess who protects children that are under the age of sixteen and couples. She is also known as 织女, the weavergirl from Chinese mythology, who has fallen in love with the cowherd 牛郎. They are separated by the milky way because they have violated the laws of heaven, and are only allowed to meet each other on the seventh day of the seventh month on the lunar calendar. This day is celebrated as 七夕节 (QiXi Festival), which is still celebrated as Valentines."
+        }
+      ],
+      "correct_answer_index": 3
+    }
+  ]
+}

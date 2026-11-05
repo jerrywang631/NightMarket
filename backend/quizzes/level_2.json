@@ -1,0 +1,97 @@
+{
+  "quiz_id": "level_2",
+  "version": 1,
+  "source": "Assets/Hokkien/LessonContent/Level 2 Questions.asset",
+  "questions": [
+    {
+      "question": "What is the origin of Hsinchu Pork Ball (新竹肉丸)？",
+      "choices": [
+        {
+          "text": "Created by a son for his blind mother",
+          "poj": "",
+          "audio": "",
+          "explanation": "Hsinchu Pork Ball (新竹肉丸) is a meat ball made from beating pork into a paste and shaping into balls. It is a dish said to have been created during the Ming dynasty by a devoted son for his blind mother, to help her eat pork more easily. It originated from Fujian (which is part of Minnan) and was brought to Taiwan during the Qing dynasty. Hsinchu is the most famous producer of pork balls in Taiwan."
+        },
+        {
+          "text": "Created by fisherman to make pork easier to store",
+          "poj": "",
+          "audio": "",
+          "explanation": "This is made up."
+        },
+        {
+          "text": "Created by workers to make pork easier to carry",
+          "poj": "",
+          "audio": "",
+          "explanation": "This is made up."
+        },
+        {
+          "text": "Created by a mother for her young son",
+          "poj": "",
+          "audio": "",
+          "explanation": "This is made up."
+        }
+      ],
+      "correct_answer_index": 0
+    },
+    {
+      "question": "Which of the following is equivalent to 30% off?",
+      "choices": [
+        {
+          "text": "打三折",
+          "poj": "Phah saⁿ-chiat",
+          "audio": "/audio-clips/level2_discount_3.wav",
+          "explanation": "The phrase “打X折” is equivalent to “100%-10X% off”"
+        },
+        {
+          "text": "打四折",
+          "poj": "Phah sì-chiat",
+          "audio": "/audio-clips/level2_discount_4.wav",
+          "explanation": "The phrase “打X折” is equivalent to “100%-10X% off”"
+        },
+        {
+          "text": "打七折",
+          "poj": "Phah chhit-chiat",
+          "audio": "/audio-clips/level2_discount_7.wav",
+          "explanation": "The phrase “打X折” is equivalent to “100%-10X% off”"
+        },
+        {
+          "text": "打三十折",
+          "poj": "Phah saⁿ-cha̍p-chiat",
+          "audio": "/audio-clips/level2_discount_30.wav",
+          "explanation": "The phrase “打X折” is equivalent to “100%-10X% off”"
+        }
+      ],
+      "correct_answer_index": 2
+    },
+    {
+      "question": "If you ask for a discount, which of the following responses from the vendor is NOT a rejection?",
+      "choices": [
+        {
+          "text": "今天没有折扣。",
+          "poj": "Kin-á-ji̍t bô phah-chiat.",
+          "audio": "/audio-clips/level2_no_discount_today.wav",
+          "explanation": "This means “there is no discount today”, which is a rejection."
+        },
+        {
+          "text": "周末才有活动。",
+          "poj": "Chiu-boa̍t chiah ū oa̍h-tāng.",
+          "audio": "/audio-clips/level2_weekend_only.wav",
+          "explanation": "This means “there’s only discounts on weekends”, which is a rejection."
+        },
+        {
+          "text": "我們已經是這邊最便宜的了。",
+          "poj": "Goán í-keng sī chia siōng siók--ê ah.",
+          "audio": "/audio-clips/level2_already_cheapest.wav",
+          "explanation": "This means “Ours is already the cheapest here”, which is a rejection."
+        },
+        {
+          "text": "给你打八折",
+          "poj": "Hō͘ lí phah peh-chiat.",
+          "audio": "/audio-clips/level2_twenty_off.wav",
+          "explanation": "The vendor offered a 20% off discount!"
+        }
+      ],
+      "correct_answer_index": 3
+    }
+  ]
+}

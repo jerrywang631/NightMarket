@@ -1,0 +1,97 @@
+{
+  "quiz_id": "tutorial",
+  "version": 1,
+  "source": "Assets/Hokkien/LessonContent/Tutorial Questions.asset",
+  "questions": [
+    {
+      "question": "How to Interact with Vendors?",
+      "choices": [
+        {
+          "text": "I don't know",
+          "poj": "",
+          "audio": "",
+          "explanation": "Get Close, then Press E"
+        },
+        {
+          "text": "Get Close, then Press S",
+          "poj": "",
+          "audio": "",
+          "explanation": "Get Close, then Press E"
+        },
+        {
+          "text": "Get Close, then Press Tab",
+          "poj": "",
+          "audio": "",
+          "explanation": "Get Close, then Press E"
+        },
+        {
+          "text": "Get Close, then Press E",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        }
+      ],
+      "correct_answer_index": 3
+    },
+    {
+      "question": "How to Open the Menu?",
+      "choices": [
+        {
+          "text": "I don't know",
+          "poj": "",
+          "audio": "",
+          "explanation": "Press Tab"
+        },
+        {
+          "text": "Press Tab",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        },
+        {
+          "text": "Press S",
+          "poj": "",
+          "audio": "",
+          "explanation": "Press Tab"
+        },
+        {
+          "text": "Press Space",
+          "poj": "",
+          "audio": "",
+          "explanation": "Press Tab"
+        }
+      ],
+      "correct_answer_index": 1
+    },
+    {
+      "question": "How do you unlock the next lesson?",
+      "choices": [
+        {
+          "text": "Find the Pineapple Juice Vendor and Talk to them",
+          "poj": "",
+          "audio": "",
+          "explanation": "Complete lesson-specific quiz"
+        },
+        {
+          "text": "Complete lesson-specific quiz",
+          "poj": "",
+          "audio": "",
+          "explanation": ""
+        },
+        {
+          "text": "Talk to all vendors",
+          "poj": "",
+          "audio": "",
+          "explanation": "Complete lesson-specific quiz"
+        },
+        {
+          "text": "Choose from the Menu",
+          "poj": "",
+          "audio": "",
+          "explanation": "Complete lesson-specific quiz"
+        }
+      ],
+      "correct_answer_index": 1
+    }
+  ]
+}

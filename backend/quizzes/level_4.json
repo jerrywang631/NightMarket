@@ -1,0 +1,91 @@
+{
+  "quiz_id": "level_4",
+  "version": 1,
+  "source": "Assets/Hokkien/LessonContent/Level 4 Questions.asset",
+  "questions": [
+    {
+      "question": "Which of the following is not a dessert?",
+      "choices": [
+        {
+          "text": "凤梨酥 - pineapple cake",
+          "poj": "Ông-lâi-so͘",
+          "audio": "/audio-clips/level1_pineapple_cake.wav",
+          "explanation": "Pineapple cake (凤梨酥) is a Taiwanese pastry, with pineapple and wintermelon filling inside a pastry shell. It is a dessert."
+        },
+        {
+          "text": "豆花 - toufu, bean curd",
+          "poj": "Tāu-hoe",
+          "audio": "/audio-clips/level4_bean_curd.wav",
+          "explanation": "Bean curd (豆花) is a sweet tofu dessert served in sugar soup."
+        },
+        {
+          "text": "冰沙（剉冰）- shaved ice",
+          "poj": "Chhoah-peng",
+          "audio": "/audio-clips/level4_shaved_ice.wav",
+          "explanation": "Shaved ice (剉冰) is a dessert with shaved ice in brown sugar soup, often served with toppings such as taro, red bean, or mung bean."
+        },
+        {
+          "text": "鸡翅包饭 - chicken wing rice roll",
+          "poj": "Ke-si̍t pau-pn̄g",
+          "audio": "/audio-clips/level4_chicken_wing_rice.wav",
+          "explanation": "Chicken wing rice roll (鸡翅包饭) is a dish with sticky rice stuffed into chicken wings."
+        }
+      ],
+      "correct_answer_index": 3
+    },
+    {
+      "question": "What should you say if you want full sugar in your bubble tea?",
+      "choices": [
+        {
+          "text": "无糖",
+          "poj": "Bô-thn̂g",
+          "audio": "/audio-clips/level4_no_sugar.wav",
+          "explanation": "This means “no sugar”."
+        },
+        {
+          "text": "三分糖",
+          "poj": "Saⁿ-hun thn̂g",
+          "audio": "/audio-clips/level4_thirty_sugar.wav",
+          "explanation": "This means “30% sugar”, “X分”=10X%"
+        },
+        {
+          "text": "半糖",
+          "poj": "Pòaⁿ-thn̂g",
+          "audio": "/audio-clips/level4_half_sugar.wav",
+          "explanation": "This means “half sugar.”"
+        },
+        {
+          "text": "全糖",
+          "poj": "Choân-thn̂g",
+          "audio": "/audio-clips/level4_full_sugar.wav",
+          "explanation": "This means “full sugar”."
+        }
+      ],
+      "correct_answer_index": 3
+    },
+    {
+      "question": "What should you say if you want less of something?",
+      "choices": [
+        {
+          "text": "不要",
+          "poj": "M̄-ài",
+          "audio": "/audio-clips/level3_dont_want.wav",
+          "explanation": "This means “don’t want”, you would say this if you would like none of something."
+        },
+        {
+          "text": "多放",
+          "poj": "Khǹg khah chē",
+          "audio": "/audio-clips/level4_put_more.wav",
+          "explanation": "This means “put more”, you would say this if you would like more of something."
+        },
+        {
+          "text": "少放",
+          "poj": "Khǹg khah chió",
+          "audio": "/audio-clips/level4_put_less.wav",
+          "explanation": "This means “put less”, you would say this if you would like less of something."
+        }
+      ],
+      "correct_answer_index": 2
+    }
+  ]
+}

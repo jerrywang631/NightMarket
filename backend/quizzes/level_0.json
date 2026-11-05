@@ -1,0 +1,31 @@
+{
+  "quiz_id": "level_0",
+  "version": 1,
+  "source": "Assets/Hokkien/LessonContent/Level 0 Questions.asset",
+  "questions": [
+    {
+      "question": "How do you say \"One please.\" in Hokkien?",
+      "choices": [
+        {
+          "text": "我要一个",
+          "poj": "Guá beh chi̍t-ê",
+          "audio": "/audio-clips/level0_one.wav",
+          "explanation": "一 = 1 = one"
+        },
+        {
+          "text": "我要两个",
+          "poj": "Guá beh nn̄g-ê",
+          "audio": "/audio-clips/level0_two.wav",
+          "explanation": "For \"two\" of an object, Hokkien uses 两/兩 (nn̄g) rather than 二 (jī)."
+        },
+        {
+          "text": "我要三个",
+          "poj": "Guá beh saⁿ-ê",
+          "audio": "/audio-clips/level0_three.wav",
+          "explanation": "三 = 3 = three"
+        }
+      ],
+      "correct_answer_index": 0
+    }
+  ]
+}
