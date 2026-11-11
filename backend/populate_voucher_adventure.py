@@ -17,6 +17,8 @@ import json
 import os
 import sqlite3
 
+from voucher_adventure.content import BASE_OFFER_DEFINITIONS
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASES = {
@@ -26,13 +28,22 @@ DATABASES = {
 
 
 NPCS = [
-    ("npc_va_001", "Pepper Bun Vendor"),
-    ("npc_va_002", "Chicken Wing Rice Roll Vendor"),
-    ("npc_va_003", "Hsinchu Pork Ball Vendor"),
-    ("npc_va_004", "Tube Rice Pudding Vendor"),
-    ("npc_va_005", "Steamed Taro Cake Vendor"),
+    ("npc_va_001", "Pepper Bun Vendor (Variant A)"),
+    ("npc_va_002", "Chicken Wing Rice Roll Vendor (Variant A)"),
+    ("npc_va_003", "Hsinchu Pork Ball Vendor (Variant A)"),
+    ("npc_va_004", "Tube Rice Pudding Vendor (Variant A)"),
+    ("npc_va_005", "Steamed Taro Cake Vendor (Variant A)"),
     ("npc_va_guide", "Voucher Guide"),
 ]
+
+for variant in ("B", "C"):
+    NPCS.extend(
+        (
+            f"{offer['npc_id']}_{variant}",
+            f"{offer['vendor_name']} (Variant {variant})",
+        )
+        for offer in BASE_OFFER_DEFINITIONS
+    )
 
 VENDORS = [
     ("v_va_001", "n_va_v1_greet", "npc_va_001", "Pepper Bun Vendor"),
@@ -62,6 +73,18 @@ DIALOGUE_NODES = [
     ("n_va_guide_intro", "n_000", "npc_va_guide"),
 ]
 
+for variant in ("B", "C"):
+    for offer in BASE_OFFER_DEFINITIONS:
+        npc_id = f"{offer['npc_id']}_{variant}"
+        greet_node = f"{offer['root_node_id']}_{variant}"
+        offer_node = f"{offer['offer_node_id']}_{variant}"
+        DIALOGUE_NODES.extend(
+            [
+                (greet_node, "n_000", npc_id),
+                (offer_node, greet_node, npc_id),
+            ]
+        )
+
 DIALOGUES = [
     (
         "n_va_v1_greet",
@@ -69,7 +92,7 @@ DIALOGUES = [
         "Fresh pepper buns are $8 each.",
         "新鮮的胡椒餅，一個八箍。",
         "Sin-chhiⁿ ê hô͘-chio-piáⁿ, chi̍t ê peh kho͘.",
-        "",
+        "audio-clips/n_va_v1_greet.wav",
         "npc_va_001",
     ),
     (
@@ -78,7 +101,7 @@ DIALOGUES = [
         "Yeah—the second one is half price.",
         "有，第二個半價。",
         "Ū, tē-jī ê pòaⁿ-kè.",
-        "",
+        "audio-clips/n_va_v1_offer.wav",
         "npc_va_001",
     ),
     (
@@ -87,7 +110,7 @@ DIALOGUES = [
         "Chicken wing rice rolls are normally $10 each.",
         "雞翅包飯原價一個十箍。",
         "Ke-si̍t pau-pn̄g goân-kè chi̍t ê cha̍p kho͘.",
-        "",
+        "audio-clips/n_va_v2_greet.wav",
         "npc_va_002",
     ),
     (
@@ -96,7 +119,7 @@ DIALOGUES = [
         "They're 20% off today.",
         "今仔日減兩成。",
         "Kin-á-ji̍t kiám nn̄g-siâⁿ.",
-        "",
+        "audio-clips/n_va_v2_offer.wav",
         "npc_va_002",
     ),
     (
@@ -105,7 +128,7 @@ DIALOGUES = [
         "Hsinchu pork balls are normally $10 each.",
         "新竹貢丸原價一個十箍。",
         "Sin-tek kòng-oân goân-kè chi̍t ê cha̍p kho͘.",
-        "",
+        "audio-clips/n_va_v3_greet.wav",
         "npc_va_003",
     ),
     (
@@ -114,7 +137,7 @@ DIALOGUES = [
         "They're 30% off today.",
         "今仔日減三成。",
         "Kin-á-ji̍t kiám saⁿ-siâⁿ.",
-        "",
+        "audio-clips/n_va_v3_offer.wav",
         "npc_va_003",
     ),
     (
@@ -123,7 +146,7 @@ DIALOGUES = [
         "Tube rice puddings are $6 each.",
         "筒仔米糕一個六箍。",
         "Tâng-á-bí-ko chi̍t ê la̍k kho͘.",
-        "",
+        "audio-clips/n_va_v4_greet.wav",
         "npc_va_004",
     ),
     (
@@ -132,7 +155,7 @@ DIALOGUES = [
         "Yeah—buy one, get one free.",
         "有，買一個送一個。",
         "Ū, bé chi̍t ê sàng chi̍t ê.",
-        "",
+        "audio-clips/n_va_v4_offer.wav",
         "npc_va_004",
     ),
     (
@@ -141,7 +164,7 @@ DIALOGUES = [
         "Steamed taro cakes are $5 each.",
         "芋粿巧一個五箍。",
         "Ō͘-kóe-khiáu chi̍t ê gō͘ kho͘.",
-        "",
+        "audio-clips/n_va_v5_greet.wav",
         "npc_va_005",
     ),
     (
@@ -150,7 +173,7 @@ DIALOGUES = [
         "Today they're $2 off each.",
         "今仔日一個減兩箍。",
         "Kin-á-ji̍t chi̍t ê kiám nn̄g kho͘.",
-        "",
+        "audio-clips/n_va_v5_offer.wav",
         "npc_va_005",
     ),
     (
@@ -174,8 +197,42 @@ DIALOGUES = [
     ),
 ]
 
+# B/C are review-only Admin trees. Gameplay still uses the five base NPC IDs.
+for variant in ("B", "C"):
+    for offer in BASE_OFFER_DEFINITIONS:
+        npc_id = f"{offer['npc_id']}_{variant}"
+        greet_node = f"{offer['root_node_id']}_{variant}"
+        offer_node = f"{offer['offer_node_id']}_{variant}"
+        greet_en, greet_han, greet_poj = offer["greet"][variant]
+        offer_en, offer_han, offer_poj = offer["offer_dialogue"]
+        DIALOGUES.extend(
+            [
+                (
+                    greet_node,
+                    f"d_{greet_node[2:]}",
+                    greet_en,
+                    greet_han,
+                    greet_poj,
+                    f"audio-clips/{greet_node}.wav",
+                    npc_id,
+                ),
+                (
+                    offer_node,
+                    f"d_{offer_node[2:]}",
+                    offer_en,
+                    offer_han,
+                    offer_poj,
+                    f"audio-clips/{offer['offer_node_id']}.wav",
+                    npc_id,
+                ),
+            ]
+        )
+
 GUIDE_AUDIO_INPUTS = [
-    ("n_va_guide_intro", DIALOGUES[-1][4]),
+    (
+        "n_va_guide_intro",
+        next(row[4] for row in DIALOGUES if row[0] == "n_va_guide_intro"),
+    ),
 ]
 
 
@@ -301,6 +358,30 @@ OPTIONS = [
     ),
 ]
 
+base_options = {row[1]: row for row in OPTIONS}
+for variant in ("B", "C"):
+    for offer in BASE_OFFER_DEFINITIONS:
+        ask = base_options[offer["ask_option_id"]]
+        confirm = base_options[offer["confirm_option_id"]]
+        OPTIONS.extend(
+            [
+                (
+                    f"{offer['root_node_id']}_{variant}",
+                    f"{offer['ask_option_id']}_{variant}",
+                    ask[2],
+                    f"{offer['offer_node_id']}_{variant}",
+                    ask[4],
+                ),
+                (
+                    f"{offer['offer_node_id']}_{variant}",
+                    f"{offer['confirm_option_id']}_{variant}",
+                    confirm[2],
+                    "",
+                    confirm[4],
+                ),
+            ]
+        )
+
 RETIRED_OPTION_IDS = [
     "o_va_guide_continue_explain",
     "o_va_guide_continue_shop",
@@ -422,11 +503,11 @@ def populate(cursor):
 
 def verify(cursor):
     expected_counts = {
-        "npcs": ("npc_id", "npc_va_%", 6),
+        "npcs": ("npc_id", "npc_va_%", 16),
         "vendors": ("vendor_id", "v_va_%", 6),
-        "dialogue_nodes": ("node_id", "n_va_%", 11),
-        "dialogues": ("dialogue_id", "d_va_%", 11),
-        "options": ("option_id", "o_va_%", 12),
+        "dialogue_nodes": ("node_id", "n_va_%", 31),
+        "dialogues": ("dialogue_id", "d_va_%", 31),
+        "options": ("option_id", "o_va_%", 32),
         "events": ("event_id", "e_va_%", 6),
     }
     for table, (column, pattern, expected) in expected_counts.items():
@@ -444,6 +525,28 @@ def verify(cursor):
         ).fetchone()
         if actual != (node_id, npc_id):
             raise RuntimeError(f"Vendor mapping mismatch for {vendor_id}: {actual}")
+
+    for node_id, _, _, _, _, audio_clip, _ in DIALOGUES:
+        if not audio_clip:
+            raise RuntimeError(f"Dialogue {node_id} has no audio_clip")
+        audio_path = os.path.join(BASE_DIR, "audio-clips", os.path.basename(audio_clip))
+        if not os.path.isfile(audio_path):
+            raise RuntimeError(f"Dialogue {node_id} audio is missing: {audio_path}")
+
+    review_npcs = [npc_id for npc_id, _ in NPCS if npc_id.endswith(("_B", "_C"))]
+    placeholders = ",".join("?" for _ in review_npcs)
+    review_vendors = cursor.execute(
+        f"SELECT vendor_id FROM vendors WHERE npc_id IN ({placeholders})", review_npcs
+    ).fetchall()
+    if review_vendors:
+        raise RuntimeError(f"Review-only NPCs must not be vendors: {review_vendors}")
+
+    review_events = cursor.execute(
+        """SELECT event_id FROM events
+           WHERE option_id LIKE 'o_va_%_B' OR option_id LIKE 'o_va_%_C'"""
+    ).fetchall()
+    if review_events:
+        raise RuntimeError(f"Review-only options must not have events: {review_events}")
 
     for option_id, _, event_type, metadata in EVENTS:
         payload = json.loads(metadata)
