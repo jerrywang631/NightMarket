@@ -68,7 +68,7 @@ def create_tables(cursor):
             translation_POJ TEXT,
             audio_clip TEXT,
             npc_id TEXT,
-            speaker TEXT
+            speaker_type TEXT
         )
     """)
     cursor.execute("""
@@ -337,7 +337,7 @@ def populate_dialogues(cursor):
         ),
     ]
     cursor.executemany(
-        "INSERT OR IGNORE INTO dialogues VALUES (?,?,?,?,?,?,?)", dialogues)
+        "INSERT OR IGNORE INTO dialogues (node_id, dialogue_id, dialogue, translation_HAN, translation_POJ, audio_clip, npc_id) VALUES (?,?,?,?,?,?,?)", dialogues)
     print(f"   Inserted {len(dialogues)} dialogue lines")
 
 

@@ -376,7 +376,7 @@ def populate_dialogues(cursor):
          "Here you go! Stay cool!",
          "来！消暑一下！", "audio-clips/n_l4_v3_complete.wav", "npc_shaved_ice", "npc_shaved_ice"),
     ]
-    cursor.executemany("INSERT OR IGNORE INTO dialogues VALUES (?,?,?,?,?,?,?)", dialogues)
+    cursor.executemany("INSERT OR IGNORE INTO dialogues (node_id, dialogue_id, dialogue, translation_HAN, translation_POJ, audio_clip, npc_id) VALUES (?,?,?,?,?,?,?)", dialogues)
     print(f"  Inserted {len(dialogues)} dialogue lines")
 
 

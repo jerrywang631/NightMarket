@@ -192,7 +192,7 @@ def populate_dialogues(cursor):
         ("n_l3_v1_thai_chili",    "d_l3_v1_010", "Thai sweet chili sauce please!", "泰式甜辣酱！", "audio-clips/n_l3_v1_thai_chili.wav", "npc_oyster_omelette", "player"),
         ("n_l3_v1_complete",      "d_l3_v1_011", "Here you go! Enjoy!", "来！请慢用！", "audio-clips/n_l3_v1_complete.wav", "npc_oyster_omelette", "npc_oyster_omelette"),
     ]
-    cursor.executemany("INSERT OR IGNORE INTO dialogues VALUES (?,?,?,?,?,?,?)", dialogues)
+    cursor.executemany("INSERT OR IGNORE INTO dialogues (node_id, dialogue_id, dialogue, translation_HAN, translation_POJ, audio_clip, npc_id) VALUES (?,?,?,?,?,?,?)", dialogues)
     print(f"  Inserted {len(dialogues)} dialogue lines")
 
 

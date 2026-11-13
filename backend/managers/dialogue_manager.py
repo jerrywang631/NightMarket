@@ -23,6 +23,36 @@ class Dialogue_Manager(Hok_DB):
         self.db = self.connect()
         self.db.create_table("option_translations", OPTION_TRANSLATIONS_COLUMNS)
 
+    def has_speaker_column(self):
+        columns = self.db.get_data("PRAGMA table_info(dialogues)")
+        return any(col[1] == "speaker_type" for col in columns)
+
+    def add_speaker_column(self):
+        """Adds dialogues.speaker_type (PLAYER / NPC) if it is missing. Existing
+        rows get NULL, which Unity treats as "guess from turn order"."""
+        if not self.has_speaker_column():
+            conn = self.db.get_connection()
+            conn.execute("ALTER TABLE dialogues ADD COLUMN speaker_type TEXT")
+            conn.commit()
+            conn.close()
+
+    def set_speaker_type(self, node_id, speaker_type):
+        speaker_type = (speaker_type or "").strip().upper()
+        if speaker_type not in ("PLAYER", "NPC", ""):
+            raise ValueError("speaker_type must be PLAYER, NPC or empty")
+        self.add_speaker_column()
+        self.db.update("dialogues", {"speaker_type": speaker_type or None},
+                       "node_id = ?", (node_id,))
+
+    def get_speaker_type(self, node_id):
+        """PLAYER / NPC, or "" when unset (Unity then guesses from turn order).
+        Read by name, not position, so older DBs without the column still work."""
+        if not self.has_speaker_column():
+            return ""
+        rows = self.db.get_data(
+            "SELECT speaker_type FROM dialogues WHERE node_id = ?", (node_id,))
+        return (rows[0][0] or "") if rows else ""
+
     def get_dialogue_node(self, node_id):
         dialogue = self.get_dialogue(node_id)[0]
         next_nodes = self.get_next_nodes(node_id)
@@ -50,12 +80,18 @@ class Dialogue_Manager(Hok_DB):
                 events_data.append(
                     {"event_id": evt[1], "event_type": evt[2], "metadata": evt[3]}
                 )
+            han, poj, audio = self.get_option_translation(option[1])
             options_data.append(
                 {
                     "option_id": option[1],
                     "text": option[2],
                     "next_node": option[3],
                     "feedback_type": option[4],
+                    # Unity shows the POJ under the button and plays the audio on
+                    # click; when these are empty it generates them itself.
+                    "translation_HAN": han,
+                    "translation_POJ": poj,
+                    "audio": audio_url(audio),
                     "events": events_data,
                 }
             )
@@ -69,6 +105,7 @@ class Dialogue_Manager(Hok_DB):
                 "translation_POJ": dialogue[4],
                 "audio": audio_url(dialogue[5]),
                 "npc_id": dialogue[6],
+                "speaker_type": self.get_speaker_type(node_id),
                 "key_words": key_words_data,
             },
             "options": options_data,
@@ -93,6 +130,15 @@ class Dialogue_Manager(Hok_DB):
     def get_node_options(self, node_id):
         command = "SELECT * FROM options WHERE node_id='%s'" % node_id
         return self.db.get_data(command)
+
+    def get_option_translation(self, option_id):
+        """(translation_HAN, translation_POJ, audio_clip) of an option, "" when unset."""
+        rows = self.db.get_data(
+            "SELECT translation_HAN, translation_POJ, audio_clip FROM option_translations "
+            "WHERE option_id = ?",
+            (option_id,),
+        )
+        return tuple(v or "" for v in rows[0]) if rows else ("", "", "")
 
     def get_option_events(self, option_id):
         command = "SELECT * FROM events WHERE option_id='%s'" % option_id

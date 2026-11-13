@@ -260,7 +260,7 @@ def populate_dialogues(cursor):
          "audio-clips/n_l1_v3_complete.wav", "npc_sweet_potato", "npc_sweet_potato"),
     ]
     cursor.executemany(
-        "INSERT OR IGNORE INTO dialogues VALUES (?,?,?,?,?,?,?)", dialogues)
+        "INSERT OR IGNORE INTO dialogues (node_id, dialogue_id, dialogue, translation_HAN, translation_POJ, audio_clip, npc_id) VALUES (?,?,?,?,?,?,?)", dialogues)
     print(f"   Inserted {len(dialogues)} dialogue lines")
 
 

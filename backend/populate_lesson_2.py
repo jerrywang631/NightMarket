@@ -150,6 +150,7 @@ def populate_dialogue_nodes(cursor):
         ("n_l2_v2_discount", "n_l2_v2_original",   "npc_chicken_wing"),
         ("n_l2_v2_order",    "n_l2_v2_discount",   "npc_chicken_wing"),
         ("n_l2_v2_complete", "n_l2_v2_order",      "npc_chicken_wing"),
+        ("n_l2_v2_bless",    "n_l2_v2_complete",   "npc_chicken_wing"),
 
         # ── Path 3: 新竹贡丸 — BOGO ──────────────────────────────────
         ("n_l2_v3_greet",    "n_000",           "npc_pork_ball"),
@@ -239,16 +240,15 @@ def populate_dialogues(cursor):
          "audio-clips/n_l2_v2_order.wav", "npc_chicken_wing", "player"),
 
         ("n_l2_v2_complete", "d_l2_v2_006",
-         "Here you go!",  # "May your business prosper should be said by the player to the
-                          # vendor" - the original line was split into 2 different lines
-         "来！生意兴隆！",
-         "audio-clips/n_l2_v2_complete.wav", "npc_chicken_wing", "npc_chicken_wing"),  # Hokkien translation and audio
-        # clip must be modified to match the new line
+         "Here you go!",
+         "来！",
+         "audio-clips/n_l2_v2_complete.wav", "npc_chicken_wing", "npc_chicken_wing"),
 
-        ("n_l2_v2_complete", "d_l2_v2_006",
+        # The player blesses the vendor, so it is its own line after the vendor's.
+        ("n_l2_v2_bless", "d_l2_v2_007",
          "May your business prosper!",
-         "",
-         "", "npc_chicken_wing", "player"),  # New Hokkien translation and audio clip to be added to match the new line
+         "生意兴隆！",
+         "audio-clips/n_l2_v2_bless.wav", "npc_chicken_wing", "player"),
 
         # ── Path 3: 新竹贡丸 — BOGO ──────────────────────────────────
 
@@ -357,7 +357,7 @@ def populate_dialogues(cursor):
          "audio-clips/n_l2_v5_complete.wav", "npc_taro_cake", "npc_taro_cake"),
     ]
     cursor.executemany(
-        "INSERT OR IGNORE INTO dialogues VALUES (?,?,?,?,?,?,?)", dialogues)
+        "INSERT OR IGNORE INTO dialogues (node_id, dialogue_id, dialogue, translation_HAN, translation_POJ, audio_clip, npc_id) VALUES (?,?,?,?,?,?,?)", dialogues)
     print(f"   Inserted {len(dialogues)} dialogue lines")
 
 
@@ -402,7 +402,7 @@ def populate_words(cursor):
          "量词 (measure word) for box-shaped items",
          ""),
 
-        ("d_l2_v2_006", "w_l2_008",
+        ("d_l2_v2_007", "w_l2_008",
          "生意兴隆", "May your business prosper (sing-i hing-liông)",
          "A blessing said to vendors — a sign of goodwill and good culture",
          ""),
