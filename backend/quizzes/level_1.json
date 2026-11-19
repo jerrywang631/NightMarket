@@ -1,6 +1,6 @@
 {
   "quiz_id": "level_1",
-  "version": 2,
+  "version": 3,
   "source": "Assets/Hokkien/LessonContent/Level 1 Questions.asset",
   "questions": [
     {
@@ -64,7 +64,7 @@
       "correct_answer_index": 3
     },
     {
-      "question": "Which of the following is traditionally used as a worship food for the Seven Sisters festival?",
+      "question": "Which of the following is traditionally offered as a worship food on the Qixi (Seven Sisters) Festival?",
       "choices": [
         {
           "text": "凤梨酥 - pineapple cake",
@@ -88,7 +88,7 @@
           "text": "白糖粿 - fried sweet rice cake",
           "poj": "Pe̍h-thn̂g-kué",
           "audio": "/audio-clips/level1_sweet_rice_cake.wav",
-          "explanation": "Fried Sweet Rice Cake(白糖粿) is a fried sticky rice dough served with grinded peanuts or sesame. It is a worship food for 七娘妈 (Seven Star), the goddess who protects children that are under the age of sixteen and couples. She is also known as 织女, the weavergirl from Chinese mythology, who has fallen in love with the cowherd 牛郎. They are separated by the milky way because they have violated the laws of heaven, and are only allowed to meet each other on the seventh day of the seventh month on the lunar calendar. This day is celebrated as 七夕节 (QiXi Festival), which is still celebrated as Valentines."
+          "explanation": "Fried sweet rice cake (白糖粿) is fried sticky rice dough served with ground peanuts or sesame. It is a worship food for 七娘妈 (the Seven Star Lady), the goddess who protects couples and children under the age of sixteen. She is also known as 织女, the weaver girl from Chinese mythology who fell in love with the cowherd 牛郎. Because they broke the laws of heaven, they were separated by the Milky Way and may only meet on the seventh day of the seventh lunar month. This day is celebrated as 七夕节 (the Qixi or Seven Sisters Festival), now also known as Chinese Valentine's Day."
         }
       ],
       "correct_answer_index": 3

@@ -1,16 +1,16 @@
 {
   "quiz_id": "level_2",
-  "version": 1,
+  "version": 2,
   "source": "Assets/Hokkien/LessonContent/Level 2 Questions.asset",
   "questions": [
     {
-      "question": "What is the origin of Hsinchu Pork Ball (新竹肉丸)？",
+      "question": "What is the origin of Hsinchu Pork Ball (新竹贡丸)?",
       "choices": [
         {
           "text": "Created by a son for his blind mother",
           "poj": "",
           "audio": "",
-          "explanation": "Hsinchu Pork Ball (新竹肉丸) is a meat ball made from beating pork into a paste and shaping into balls. It is a dish said to have been created during the Ming dynasty by a devoted son for his blind mother, to help her eat pork more easily. It originated from Fujian (which is part of Minnan) and was brought to Taiwan during the Qing dynasty. Hsinchu is the most famous producer of pork balls in Taiwan."
+          "explanation": "Hsinchu Pork Ball (新竹贡丸) is a meat ball made by beating pork into a paste and shaping it into balls. It is said to have been created during the Ming dynasty by a devoted son for his blind mother, to help her eat pork more easily. It originated in Fujian (part of the Minnan region) and was brought to Taiwan during the Qing dynasty. Hsinchu is the most famous producer of pork balls in Taiwan."
         },
         {
           "text": "Created by fisherman to make pork easier to store",
@@ -79,7 +79,7 @@
           "explanation": "This means “there’s only discounts on weekends”, which is a rejection."
         },
         {
-          "text": "我們已經是這邊最便宜的了。",
+          "text": "我们已经是这边最便宜的了。",
           "poj": "Goán í-keng sī chia siōng siók--ê ah.",
           "audio": "/audio-clips/level2_already_cheapest.wav",
           "explanation": "This means “Ours is already the cheapest here”, which is a rejection."

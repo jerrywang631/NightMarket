@@ -1,6 +1,6 @@
 {
   "quiz_id": "level_4",
-  "version": 1,
+  "version": 2,
   "source": "Assets/Hokkien/LessonContent/Level 4 Questions.asset",
   "questions": [
     {
@@ -10,25 +10,25 @@
           "text": "凤梨酥 - pineapple cake",
           "poj": "Ông-lâi-so͘",
           "audio": "/audio-clips/level1_pineapple_cake.wav",
-          "explanation": "Pineapple cake (凤梨酥) is a Taiwanese pastry, with pineapple and wintermelon filling inside a pastry shell. It is a dessert."
+          "explanation": "Pineapple cake (凤梨酥) is a Taiwanese pastry with pineapple and winter melon filling inside a pastry shell. It is a dessert."
         },
         {
-          "text": "豆花 - toufu, bean curd",
+          "text": "豆花 - tofu pudding",
           "poj": "Tāu-hoe",
           "audio": "/audio-clips/level4_bean_curd.wav",
-          "explanation": "Bean curd (豆花) is a sweet tofu dessert served in sugar soup."
+          "explanation": "Tofu pudding (豆花) is a soft, sweet tofu dessert served in syrup."
         },
         {
-          "text": "冰沙（剉冰）- shaved ice",
+          "text": "剉冰 - shaved ice",
           "poj": "Chhoah-peng",
           "audio": "/audio-clips/level4_shaved_ice.wav",
-          "explanation": "Shaved ice (剉冰) is a dessert with shaved ice in brown sugar soup, often served with toppings such as taro, red bean, or mung bean."
+          "explanation": "Shaved ice (剉冰) is a dessert of finely shaved ice with brown sugar syrup, often topped with taro, red bean or mung bean."
         },
         {
           "text": "鸡翅包饭 - chicken wing rice roll",
           "poj": "Ke-si̍t pau-pn̄g",
           "audio": "/audio-clips/level4_chicken_wing_rice.wav",
-          "explanation": "Chicken wing rice roll (鸡翅包饭) is a dish with sticky rice stuffed into chicken wings."
+          "explanation": "Chicken wing rice roll (鸡翅包饭) is a savory dish of sticky rice stuffed into chicken wings, not a dessert."
         }
       ],
       "correct_answer_index": 3
